@@ -45,6 +45,7 @@ class DanbooruPostRepository {
         page: page,
         limit: normalizedLimit,
         tags: normalizedTags,
+        auth: auth,
       );
 
       try {
@@ -98,6 +99,7 @@ class DanbooruPostRepository {
         base: base,
         query: normalizedQuery,
         limit: normalizedLimit,
+        auth: auth,
       );
 
       try {
@@ -150,6 +152,7 @@ class DanbooruPostRepository {
     required int page,
     required int limit,
     required String tags,
+    required DanbooruAuth auth,
   }) {
     final baseUri = _normalizeBaseUri(base);
     final normalizedPath = _normalizePathWithSuffix(
@@ -162,6 +165,7 @@ class DanbooruPostRepository {
       'page': '$page',
       if (tags.isNotEmpty) 'tags': tags,
     };
+    _appendAuthQuery(query, auth);
 
     return baseUri.replace(path: normalizedPath, queryParameters: query);
   }
@@ -170,6 +174,7 @@ class DanbooruPostRepository {
     required String base,
     required String query,
     required int limit,
+    required DanbooruAuth auth,
   }) {
     final baseUri = _normalizeBaseUri(base);
     final normalizedPath = _normalizePathWithSuffix(baseUri.path, '/tags.json');
@@ -178,7 +183,16 @@ class DanbooruPostRepository {
       'search[order]': 'count',
       'search[name_matches]': '$query*',
     };
+    _appendAuthQuery(queryParams, auth);
     return baseUri.replace(path: normalizedPath, queryParameters: queryParams);
+  }
+
+  void _appendAuthQuery(Map<String, String> query, DanbooruAuth auth) {
+    if (!auth.isConfigured) {
+      return;
+    }
+    query['login'] = auth.login.trim();
+    query['api_key'] = auth.apiKey.trim();
   }
 
   List<String> _buildBaseCandidates(String rawBase) {
