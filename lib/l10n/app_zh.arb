@@ -1,0 +1,61 @@
+{
+  "@@locale": "zh",
+  "appTitle": "Mikansei Flutter",
+  "home": "首页",
+  "search": "搜索",
+  "favorites": "收藏",
+  "settings": "设置",
+  "latestPosts": "最新帖子",
+  "searchHint": "搜索帖子或标签",
+  "appLanguage": "界面语言",
+  "tagLanguage": "Tag 语言",
+  "followAppLanguage": "跟随界面",
+  "english": "英文",
+  "chinese": "中文",
+  "inspiredBy": "参考 uragiristereo/Mikansei",
+  "ratingSafe": "安全",
+  "ratingQuestionable": "存疑",
+  "loadingPosts": "正在从 Danbooru 加载帖子...",
+  "postLoadError": "从 Danbooru API 加载帖子失败。",
+  "retry": "重试",
+  "searchAction": "搜索",
+  "noPostsFound": "没有找到帖子",
+  "activeTagFilter": "筛选：{tags}",
+  "@activeTagFilter": {
+    "placeholders": {
+      "tags": {
+        "type": "String"
+      }
+    }
+  },
+  "noMorePosts": "没有更多帖子了",
+  "loadMoreFailed": "加载更多帖子失败",
+  "settingsLoading": "正在加载设置...",
+  "danbooruCredentials": "Danbooru 账号配置",
+  "danbooruApiBaseUrl": "Danbooru API 地址",
+  "danbooruLogin": "Danbooru 登录名",
+  "danbooruApiKey": "Danbooru API Key",
+  "recentSearches": "最近搜索",
+  "clear": "清除",
+  "searchPrompt": "输入标签后开始搜索",
+  "loadingFavorites": "正在加载收藏...",
+  "noFavoritesYet": "还没有收藏内容",
+  "apiEndpointHint": "你可以在设置中修改 API 地址或凭据。",
+  "addFavorite": "添加收藏",
+  "removeFavorite": "取消收藏",
+  "safeMode": "安全模式",
+  "safeModeDescription": "当你未填写 rating 过滤时，自动附加 rating:safe。",
+  "save": "保存",
+  "savedSettings": "设置已保存",
+  "saveFailed": "设置保存失败",
+  "authConfigured": "已启用认证请求。",
+  "authNotConfigured": "未配置 login/api_key。",
+  "comingSoon": "{feature} 功能即将上线",
+  "@comingSoon": {
+    "placeholders": {
+      "feature": {
+        "type": "String"
+      }
+    }
+  }
+}

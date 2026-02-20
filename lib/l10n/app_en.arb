@@ -1,0 +1,61 @@
+{
+  "@@locale": "en",
+  "appTitle": "Mikansei Flutter",
+  "home": "Home",
+  "search": "Search",
+  "favorites": "Favorites",
+  "settings": "Settings",
+  "latestPosts": "Latest Posts",
+  "searchHint": "Search posts or tags",
+  "appLanguage": "App language",
+  "tagLanguage": "Tag language",
+  "followAppLanguage": "Follow app",
+  "english": "English",
+  "chinese": "Chinese",
+  "inspiredBy": "Inspired by uragiristereo/Mikansei",
+  "ratingSafe": "safe",
+  "ratingQuestionable": "questionable",
+  "loadingPosts": "Loading posts from Danbooru...",
+  "postLoadError": "Failed to load posts from Danbooru API.",
+  "retry": "Retry",
+  "searchAction": "Search",
+  "noPostsFound": "No posts found",
+  "activeTagFilter": "Filter: {tags}",
+  "@activeTagFilter": {
+    "placeholders": {
+      "tags": {
+        "type": "String"
+      }
+    }
+  },
+  "noMorePosts": "No more posts",
+  "loadMoreFailed": "Failed to load more posts",
+  "settingsLoading": "Loading settings...",
+  "danbooruCredentials": "Danbooru Credentials",
+  "danbooruApiBaseUrl": "Danbooru API base URL",
+  "danbooruLogin": "Danbooru login",
+  "danbooruApiKey": "Danbooru API key",
+  "recentSearches": "Recent searches",
+  "clear": "Clear",
+  "searchPrompt": "Enter tags and search",
+  "loadingFavorites": "Loading favorites...",
+  "noFavoritesYet": "No favorites yet",
+  "apiEndpointHint": "You can change API endpoint or credentials in Settings.",
+  "addFavorite": "Add favorite",
+  "removeFavorite": "Remove favorite",
+  "safeMode": "Safe mode",
+  "safeModeDescription": "Append rating:safe if no rating filter is set.",
+  "save": "Save",
+  "savedSettings": "Settings saved",
+  "saveFailed": "Failed to save settings",
+  "authConfigured": "Authenticated requests are enabled.",
+  "authNotConfigured": "No login/api_key configured.",
+  "comingSoon": "{feature} is coming soon",
+  "@comingSoon": {
+    "placeholders": {
+      "feature": {
+        "type": "String"
+      }
+    }
+  }
+}
