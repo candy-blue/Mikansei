@@ -40,17 +40,23 @@ class DanbooruPostRepository {
     final errors = <String>[];
 
     for (final base in bases) {
+      final requestAuth = _resolveRequestAuth(
+        preferredBase: baseUrl,
+        requestBase: base,
+        auth: auth,
+      );
       final requestUri = _buildPostsUri(
         base: base,
         page: page,
         limit: normalizedLimit,
         tags: normalizedTags,
+        auth: requestAuth,
       );
 
       try {
         final response = await _httpClient.get(
           requestUri,
-          headers: _buildHeaders(auth),
+          headers: _buildHeaders(requestAuth),
         );
 
         if (response.statusCode != 200) {
@@ -94,16 +100,22 @@ class DanbooruPostRepository {
     final bases = _buildBaseCandidates(baseUrl);
 
     for (final base in bases) {
+      final requestAuth = _resolveRequestAuth(
+        preferredBase: baseUrl,
+        requestBase: base,
+        auth: auth,
+      );
       final requestUri = _buildTagsUri(
         base: base,
         query: normalizedQuery,
         limit: normalizedLimit,
+        auth: requestAuth,
       );
 
       try {
         final response = await _httpClient.get(
           requestUri,
-          headers: _buildHeaders(auth),
+          headers: _buildHeaders(requestAuth),
         );
         if (response.statusCode != 200) {
           continue;
@@ -150,6 +162,7 @@ class DanbooruPostRepository {
     required int page,
     required int limit,
     required String tags,
+    required DanbooruAuth auth,
   }) {
     final baseUri = _normalizeBaseUri(base);
     final normalizedPath = _normalizePathWithSuffix(
@@ -162,6 +175,7 @@ class DanbooruPostRepository {
       'page': '$page',
       if (tags.isNotEmpty) 'tags': tags,
     };
+    _appendAuthQuery(query, auth);
 
     return baseUri.replace(path: normalizedPath, queryParameters: query);
   }
@@ -170,6 +184,7 @@ class DanbooruPostRepository {
     required String base,
     required String query,
     required int limit,
+    required DanbooruAuth auth,
   }) {
     final baseUri = _normalizeBaseUri(base);
     final normalizedPath = _normalizePathWithSuffix(baseUri.path, '/tags.json');
@@ -178,7 +193,35 @@ class DanbooruPostRepository {
       'search[order]': 'count',
       'search[name_matches]': '$query*',
     };
+    _appendAuthQuery(queryParams, auth);
     return baseUri.replace(path: normalizedPath, queryParameters: queryParams);
+  }
+
+  void _appendAuthQuery(Map<String, String> query, DanbooruAuth auth) {
+    if (!auth.isConfigured) {
+      return;
+    }
+    query['login'] = auth.login.trim();
+    query['api_key'] = auth.apiKey.trim();
+  }
+
+
+  DanbooruAuth _resolveRequestAuth({
+    required String preferredBase,
+    required String requestBase,
+    required DanbooruAuth auth,
+  }) {
+    if (!auth.isConfigured) {
+      return const DanbooruAuth.empty();
+    }
+
+    final preferredHost = _normalizeBaseUri(preferredBase).host.toLowerCase();
+    final requestHost = _normalizeBaseUri(requestBase).host.toLowerCase();
+    if (preferredHost != requestHost) {
+      return const DanbooruAuth.empty();
+    }
+
+    return auth;
   }
 
   List<String> _buildBaseCandidates(String rawBase) {
